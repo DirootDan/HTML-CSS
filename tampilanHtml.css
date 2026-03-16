@@ -1,177 +1,89 @@
+/* style.css */
 :root {
-    --navy: #0a192f;
-    --light-navy: #112240;
-    --lightest-navy: #233554;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
-    --white: #e6f1ff;
-    --teal: #64ffda;
-    --teal-tint: rgba(100, 255, 218, 0.1);
+    --bg-color: #0f172a; /* Warna latar belakang gelap (Slate 900) */
+    --text-color: #94a3b8; /* Teks paragraf (Slate 400) */
+    --heading-color: #e2e8f0; /* Teks judul terang (Slate 200) */
+    --accent-teal: #5eead4; /* Aksen warna khas */
 }
 
 body {
-    background-color: var(--navy);
-    color: var(--slate);
-    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.6;
     margin: 0;
-    overflow-x: hidden;
-}
-
-/* Spotlight Effect */
-.spotlight-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: radial-gradient(600px at var(--x, 0px) var(--y, 0px), rgba(29, 78, 216, 0.15), transparent 80%);
-    z-index: 9999;
+    scroll-behavior: smooth;
 }
 
 .container {
-    display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 50px;
-}
-
-/* Sidebar Styling */
-.sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 45%;
-    padding: 100px 0;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-.profile h1 {
-    color: var(--white);
-    font-size: 3rem;
-    font-weight: 700;
+/* Mengunci Panel Kiri (Sticky Positioning) pada Desktop */
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 0;
+        max-height: 100vh;
+        width: 45%;
+        padding-top: 6rem;
+    }
+
+    .content {
+        width: 50%;
+        padding-top: 6rem;
+    }
 }
 
-.profile h2 {
-    color: var(--white);
-    font-size: 1.25rem;
-    margin-top: 10px;
-}
-
-.profile p {
-    max-width: 300px;
-    margin-top: 15px;
-}
-
-/* Navigation Styling */
-.nav {
-    margin-top: 50px;
-}
-
-.nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.nav li {
-    margin-bottom: 20px;
-}
-
+/* Desain Indikator Navigasi Dinamis */
+.nav ul { list-style: none; padding: 0; }
 .nav a {
-    text-decoration: none;
-    color: var(--slate);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.1rem;
     display: flex;
     align-items: center;
-    transition: all 0.3s;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    color: var(--text-color);
 }
 
 .nav-indicator {
-    width: 30px;
+    display: inline-block;
     height: 1px;
-    background-color: var(--slate);
-    margin-right: 15px;
-    transition: width 0.3s, background-color 0.3s;
-}
-
-.nav a:hover, .nav a.active {
-    color: var(--white);
-}
-
-.nav a:hover .nav-indicator, .nav a.active .nav-indicator {
-    width: 60px;
-    background-color: var(--white);
-}
-
-/* Content Styling */
-.content {
-    width: 55%;
-    padding: 100px 0;
-}
-
-section {
-    margin-bottom: 100px;
-}
-
-h3 {
-    color: var(--white);
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-}
-
-/* Project Card styling */
-.project-card {
-    background: transparent !important; 
-    border: 1px solid transparent !important;
+    width: 30px;
+    background-color: var(--text-color);
     transition: all 0.3s ease;
-    padding: 2rem !important;
+    margin-right: 1rem;
 }
 
+/* Melebarkan garis dan menebalkan teks saat di-hover atau aktif */
+.nav a:hover .nav-indicator, 
+.nav a.active .nav-indicator {
+    width: 60px;
+    background-color: var(--heading-color);
+}
+.nav a:hover .nav-text, 
+.nav a.active .nav-text {
+    color: var(--heading-color);
+    font-weight: bold;
+}
+
+/* Efek Hover Transparan pada Kartu Proyek */
+.project-card {
+    position: relative;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
 .project-card:hover {
-    background: var(--light-navy) !important;
-    border-top: 1px solid var(--lightest-navy) !important;
-    transform: translateY(-5px);
-}
-
-.project-card h4 {
-    color: var(--white);
-    transition: color 0.3s;
-}
-
-.project-card:hover h4 {
-    color: var(--teal);
-}
-
-.custom-btn {
-    color: var(--teal) !important;
-    border-color: var(--teal) !important;
-}
-
-.custom-btn:hover {
-    background-color: var(--teal-tint) !important;
-}
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 50px 0;
-    }
-    .content {
-        width: 100%;
-        padding: 50px 0;
-    }
+    background-color: rgba(30, 41, 59, 0.5); /* Latar transparan yang elegan */
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5);
 }
